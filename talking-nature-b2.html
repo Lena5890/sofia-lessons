@@ -24,7 +24,7 @@ html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
   --yellow:#FFE566;--yellow-pale:#FFFBE0;--text:#2B1018;--text-soft:#6B4455;
   --green:#1A6B40;--green-bg:#E0F7EC;--green-line:#B5E8C8;
   --serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',Arial,sans-serif;
-  --w:780px;--drawer:460px;
+  --w:780px;--drawer:560px;
 }
 body{font-family:var(--sans);background:var(--cream);color:var(--text);font-size:15px;line-height:1.55;}
 button,input,select,textarea{font:inherit;color:inherit;}
@@ -235,13 +235,22 @@ details.key .kb li{margin-left:18px;margin-bottom:4px;}
 .art-title{font-family:var(--serif);font-size:30px;line-height:1.1;margin-bottom:4px;}
 .art-title em{color:var(--rose);font-style:italic;}
 .art-sub{color:var(--text-soft);font-size:14px;margin-bottom:18px;}
+.art-sub a{color:var(--rose);font-weight:600;}
+.art-img figure{background:#fff;border:2px solid var(--pink-light);border-radius:14px;padding:10px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.art-img img{display:block;width:100%;height:auto;cursor:zoom-in;border-radius:6px;}
+.art-img figure.zoom img{width:180%;max-width:none;cursor:zoom-out;}
+.art-img .ph{padding:6px;}
+.art-img .ff{max-width:170px;margin:0 auto 12px;padding:6px;border-radius:50%;overflow:hidden;}
+.art-img .ff img{border-radius:50%;cursor:default;}
+.art-img .ff.zoom img{width:100%;}
+.img-fail{background:var(--yellow-pale);border:1.5px dashed #E8C000;border-radius:14px;padding:10px 14px;font-size:14px;}
 .art p{position:relative;padding-left:40px;margin-bottom:16px;font-size:15.5px;line-height:1.72;}
 .art p::before{content:attr(data-n);position:absolute;left:0;top:2px;width:28px;height:28px;border-radius:50%;background:var(--rose);color:#fff;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;}
 .art p:nth-child(even)::before{background:var(--blue);color:var(--text);}
 .scrim{position:fixed;inset:0;background:rgba(43,16,24,.35);z-index:75;opacity:0;pointer-events:none;transition:opacity .3s;}
 body.art-open .scrim{opacity:1;pointer-events:auto;}
 /* wide screens: article sits next to the exercises instead of covering them */
-@media (min-width:1240px){
+@media (min-width:1360px){
   body.art-open .page{margin-right:var(--drawer);}
   body.art-open .scrim{opacity:0;pointer-events:none;}
   body.art-open .dock{right:calc(var(--drawer) + 16px);}
@@ -403,8 +412,8 @@ body.art-open .scrim{opacity:1;pointer-events:auto;}
     </div>
 
     <div class="ex">
-      <div class="ex-h"><span class="num">3.1</span><p>Scan the article. Don’t read it from beginning to end.<small>You have 60 seconds. The article will close when the time is up!</small></p></div>
-      <button class="btn" data-scan="60">⚡ Start the 60-second scan</button>
+      <div class="ex-h"><span class="num">3.1</span><p>Scan the article. Don’t read it from beginning to end.<small>Look for the key words, not every sentence.</small></p></div>
+      <button class="btn" type="button" data-article>📖 Open the article</button>
       <p style="margin:16px 0 8px;font-weight:600">Which paragraph contains information about most of the communication methods from Exercise 1?</p>
       <div class="opts" data-answer="5"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button></div>
     </div>
@@ -532,11 +541,11 @@ body.art-open .scrim{opacity:1;pointer-events:auto;}
         <li><span>make group decisions?</span><input type="text" placeholder="Example + paragraph" autocomplete="off"></li>
       </ol>
       <details class="key"><summary>Possible answers</summary><div class="kb"><ul>
-        <li><b>accents</b> — white-crowned sparrows sing different regional versions of their song (P2)</li>
-        <li><b>lie or deceive</b> — the fork-tailed drongo mimics meerkat alarm calls to steal their food (P3)</li>
-        <li><b>new songs</b> — humpback whales create new songs that spread across the ocean (P4)</li>
-        <li><b>without sound</b> — chameleons (colour), treehoppers (vibrations), fireflies (light), horses (faces) (P5)</li>
-        <li><b>group decisions</b> — African wild dogs “vote” by sneezing before a hunt (P7)</li>
+        <li><b>accents</b> — mockingbirds from Kansas and Virginia pronounce their chirps differently; sperm whales recognise where strangers are from; monkeys learn the local dialect (P2)</li>
+        <li><b>lie or deceive</b> — the fork-tailed drongo mimics the alarm calls of more than thirty species to steal food (P3)</li>
+        <li><b>new songs</b> — humpback whales in the South Pacific invent new songs that other groups learn (P4)</li>
+        <li><b>without sound</b> — chameleons (colour), treehoppers (vibrations), fireflies (light), horses (facial expressions) (P5)</li>
+        <li><b>group decisions</b> — African wild dogs sneeze to decide whether to go on a hunt (P7)</li>
       </ul></div></details>
     </div>
 
@@ -805,15 +814,13 @@ body.art-open .scrim{opacity:1;pointer-events:auto;}
   <div class="drawer-h"><span class="t">📖 The <em>article</em></span><button class="x" type="button" id="closeArt" aria-label="Close article">✕</button></div>
   <div class="drawer-b">
     <h2 class="art-title">Talking <em>Nature</em></h2>
-    <p class="art-sub">Are humans really the only ones with a language?</p>
-    <div class="art">
-      <p data-n="1">For a long time, many people believed that language was the one thing that made humans truly special. We tell stories, make jokes, argue and share complicated ideas, and it is easy to assume that no other creature on Earth can do anything similar. However, scientists who study animals and plants are discovering that the natural world is full of conversations. It now seems that some aspects of human communication — accents, deception, even something like voting — may not be as uniquely human as we once thought.</p>
-      <p data-n="2">Take birdsong, for example. If you listen carefully, you will notice that the song of the same species often varies from one region to another. White-crowned sparrows in California sing slightly different versions of their song depending on where they live, in much the same way that people from different cities speak with different accents. Young birds learn the local dialect from the adults around them, and if a bird moves to a new area, it may adapt its song to fit in with its new neighbours.</p>
-      <p data-n="3">Communication is not always honest, either. In the Kalahari Desert, a small black bird called the fork-tailed drongo has learned to take advantage of other animals. It mimics the alarm calls of meerkats — the warning signal which means that a predator is nearby. When the meerkats hear it, they drop whatever they are eating and run for cover, and the drongo flies down and steals their food. In other words, the bird tells a lie to get its lunch.</p>
-      <p data-n="4">Humpback whales are famous for their long, complex songs, which can last for hours. What is even more surprising is that these songs change over time. Researchers in the South Pacific have found that a new song can appear in one population of whales and then spread from group to group across the ocean, until thousands of whales are singing it. Every year the whales add new phrases and drop old ones, rather like musicians creating new music and sharing their latest hits.</p>
-      <p data-n="5">Of course, not all communication involves sound. Animals have developed an amazing variety of means of communication. Chameleons change colour to show whether they are calm, ready to fight or looking for a partner. Tiny insects called treehoppers send vibrations through the plant stems they stand on — messages that are completely silent to us. Fireflies use flashes of light to attract a mate on summer nights, and each species has its own pattern. Horses, meanwhile, rely on their faces: scientists have identified seventeen different facial movements in horses, more than they have found in chimpanzees.</p>
-      <p data-n="6">Perhaps most surprisingly, even plants may be part of the conversation. In one experiment, researchers played sounds to young corn plants and found that their roots grew towards a particular frequency. Other studies suggest that some plants react to the sound of insects eating their leaves by producing chemicals to protect themselves. Plants do not have ears, of course, but they seem to be “listening” in their own way.</p>
-      <p data-n="7">Finally, some animals use communication to make decisions as a group. African wild dogs live and hunt in packs, and before a hunt they often hold a noisy meeting. Researchers in Botswana noticed that the dogs sneeze during these meetings — and the more sneezes there are, the more likely the pack is to set off. If a dominant dog starts the meeting, only a few sneezes are needed; if a lower-ranking dog starts it, many more are required. It is, in effect, a vote. Perhaps it is time to question what we mean by “language”, and to accept that we are not the only ones who are talking.</p>
+    <p class="art-sub">Tap a picture to zoom in · <a href="img/talking-nature-page.jpg" target="_blank" rel="noopener">open the full page ↗</a></p>
+    <div class="art-img">
+      <figure class="ph"><img src="img/tn-photos.jpg" width="1112" height="172" alt="A chameleon, B treehopper, C corn, D horse"></figure>
+      <figure><img src="img/tn-col1.jpg" width="457" height="725" alt="Paragraphs 1–3 of the article"></figure>
+      <figure><img src="img/tn-col2.jpg" width="520" height="785" alt="Paragraphs 4–7 of the article"></figure>
+      <figure class="ff"><img src="img/tn-firefly.jpg" width="210" height="265" alt="E fireflies"></figure>
+      <p class="img-fail" hidden>The article pictures didn’t load. Check your internet connection and reload the page.</p>
     </div>
   </div>
 </aside>
@@ -997,7 +1004,9 @@ function closeArt(){drawer.classList.remove('open');drawer.setAttribute('aria-hi
 document.addEventListener('click',function(e){
   if(e.target.closest('[data-article]')){drawer.classList.contains('open')?closeArt():openArt();}
 });
-$('#closeArt').onclick=closeArt;$('#scrim').onclick=closeArt;
+$('#closeArt').onclick=closeArt;
+$$('.art-img figure:not(.ff)').forEach(function(f){$('img',f).addEventListener('click',function(){f.classList.toggle('zoom');});});
+$$('.art-img img').forEach(function(im){im.addEventListener('error',function(){$('.img-fail').hidden=false;});});$('#scrim').onclick=closeArt;
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeArt();});
 
 /* ── timer ── */
@@ -1026,11 +1035,6 @@ document.addEventListener('click',function(e){
   var b=e.target.closest('[data-timer]');if(!b)return;
   startTimer(+b.dataset.timer,b.dataset.label);
   toast('⏱ '+fmt(+b.dataset.timer)+' — '+(b.dataset.label||'go!'));
-});
-document.addEventListener('click',function(e){
-  var b=e.target.closest('[data-scan]');if(!b)return;
-  openArt();$('.drawer-b').scrollTop=0;
-  startTimer(+b.dataset.scan,'Scan!',function(){closeArt();toast('⏰ Time’s up! Which paragraph was it?');b.closest('.ex').scrollIntoView({behavior:'smooth',block:'center'});});
 });
 var AC=null;
 function unlockAudio(){try{if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C();}if(AC&&AC.state==='suspended')AC.resume();}catch(e){}}
