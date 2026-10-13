@@ -1,11 +1,13 @@
 # Sofia · English lessons
 
 Интерактивные уроки Софии. Каждый урок — HTML-файл со встроенными шрифтами и без внешних запросов.
-Картинки уроков (страницы учебника) лежат в папке `img/`.
+Картинки уроков (страницы учебника) лежат в папке `img/`, аудио — в `audio/`.
 
 | Урок | Файл | Ссылка (после включения Pages) |
 |------|------|------|
 | Talking Nature: Read Smarter, Not Harder · B2 · 55 мин | `talking-nature-b2.html` | `https://lena5890.github.io/sofia-lessons/talking-nature-b2.html` |
+| Food is Free · чтение, лексика, verb patterns · 55 мин | `food-is-free.html` | `https://lena5890.github.io/sofia-lessons/food-is-free.html` |
+| Whose English Is It? · Upper-Intermediate, аудирование · 55 мин | `whose-english-is-it.html` | `https://lena5890.github.io/sofia-lessons/whose-english-is-it.html` |
 
 ## Как включить GitHub Pages
 
